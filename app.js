@@ -118,22 +118,20 @@ searchBtn.addEventListener('click', function () {
 
 sliderBtn.addEventListener('click', function () {
   createSlider();
-})
+});
 
-//search on enter keypress
-document.getElementById('search')
-  .addEventListener("keypress", function(event) {
-    if (event.key === 'Enter') {
-      document.getElementById('search-btn').click();
-    }
+//search and sliding images on enter keypress
+function enterKeypress (input, button){
+  document.getElementById(input)
+    .addEventListener("keypress", function(event) {
+      if (event.key === 'Enter') {
+        button.click();
+      }
   })
+};
+enterKeypress('search', searchBtn);
+enterKeypress('duration', sliderBtn);
 
-  document.getElementById('duration')
-  .addEventListener("keypress", function(event) {
-    if (event.key === 'Enter') {
-      document.getElementById('create-slider').click();
-    }
-  })
 
   //bonus mark -> toggleSpinner
   const toggleSpinner = () =>{

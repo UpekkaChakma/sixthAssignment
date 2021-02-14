@@ -41,8 +41,9 @@ const selectItem = (event, img) => {
   let item = sliders.indexOf(img);
   if (item === -1) {
     sliders.push(img);
-  } else if (item >= 0) {
-    sliders.pop(img);
+  }
+  else {
+    sliders.splice(item, 1);
     element.classList.remove('added');
   }
 }
@@ -112,7 +113,7 @@ searchBtn.addEventListener('click', function () {
   document.querySelector('.main').style.display = 'none';
   clearInterval(timer);
   const search = document.getElementById('search');
-  getImages(search.value)
+  getImages(search.value);
   sliders.length = 0;
 })
 

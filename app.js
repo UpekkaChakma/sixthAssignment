@@ -14,7 +14,7 @@ const getImages = (query) => {
     .then(response => response.json())
     .then(data => showImages(data.hits))
     .catch(err => console.log(err));
-}
+};
 
 // show images in block
 const showImages = (images) => {
@@ -27,9 +27,9 @@ const showImages = (images) => {
     div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
     div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
     gallery.appendChild(div);
-  })
+  });
   toggleSpinner();
-}
+};
 
 // select and unselect images for sliding 
 let sliders = [];
@@ -46,14 +46,15 @@ const selectItem = (event, img) => {
     sliders.splice(item, 1);
     element.classList.remove('added');
   }
-}
+};
+
 var timer;
 const createSlider = () => {
   // check slider image length
   if (sliders.length < 2) {
     alert('Select at least 2 image.');
     return;
-  }
+  };
   // crate slider previous next area
   sliderContainer.innerHTML = '';
   const prevNext = document.createElement('div');
@@ -75,18 +76,17 @@ const createSlider = () => {
     src="${slide}"
     alt="">`;
     sliderContainer.appendChild(item);
-  })
+  });
   changeSlide(0);
   timer = setInterval(function () {
     slideIndex++;
     changeSlide(slideIndex);
   }, duration);
-}
-
+};
 // change slider index 
 const changeItem = index => {
   changeSlide(slideIndex += index);
-}
+};
 
 // change slide item
 const changeSlide = (index) => {
@@ -95,7 +95,7 @@ const changeSlide = (index) => {
   if (index < 0) {
      slideIndex = items.length - 1;
      index = slideIndex;
-  };
+  }
 
   if (index >= items.length) {
     index = 0;
@@ -104,10 +104,10 @@ const changeSlide = (index) => {
 
   items.forEach(item => {
     item.style.display = "none";
-  })
+  });
 
   items[index].style.display = "block";
-}
+};
 
 searchBtn.addEventListener('click', function () {
   document.querySelector('.main').style.display = 'none';
@@ -115,27 +115,27 @@ searchBtn.addEventListener('click', function () {
   const search = document.getElementById('search');
   getImages(search.value);
   sliders.length = 0;
-})
+});
 
 sliderBtn.addEventListener('click', function () {
   createSlider();
 });
 
 //search and sliding images on enter keypress
-function enterKeypress (input, button){
+const enterKeypress = (input, button) => {
   document.getElementById(input)
     .addEventListener("keypress", function(event) {
       if (event.key === 'Enter') {
         button.click();
       }
-  })
+  });
 };
 enterKeypress('search', searchBtn);
 enterKeypress('duration', sliderBtn);
 
 
-  //bonus mark -> toggleSpinner
-  const toggleSpinner = () =>{
-    const spinner = document.getElementById('loading-spinner');
-    spinner.classList.toggle('d-none');
-  }
+//bonus mark -> toggleSpinner
+const toggleSpinner = () =>{
+  const spinner = document.getElementById('loading-spinner');
+  spinner.classList.toggle('d-none');
+};
